@@ -1,4 +1,0 @@
-diff --git a/okhttp/src/main/java/okhttp3/internal/http/ExchangeCode.kt b/okhttp/src/main/java/okhttp3/internal/http/ExchangeCodec.kt
-similarity index 100%
-rename from okhttp/src/main/java/okhttp3/internal/http/ExchangeCode.kt
-rename to okhttp/src/main/java/okhttp3/internal/http/ExchangeCodec.kt

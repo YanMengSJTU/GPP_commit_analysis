@@ -1,3 +1,0 @@
-diff --git a/res/.keep b/res/.keep
-new file mode 100644
-index 00000000..e69de29b

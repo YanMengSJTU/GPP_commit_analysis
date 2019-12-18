@@ -1,39 +1,27 @@
-# research_project_summary
+## GPP Commit Analysis
 
-## Files
-* [Diffs_old](https://github.com/shihualu/research_project_summary/tree/master/Diffs_old) contains commits that the owners of the forks made on the master branch, including merges from original repo. Format of filename is: *owner_of_fork*:*hash_value*.txt
+To perform the commit analysis, first perform the raw vector generation of the github commits:
 
-* [Diffs_new](https://github.com/shihualu/research_project_summary/tree/master/Diffs_new) takes branches into consideration and removes most merges. It includes commits that the owners of the forks made on other branches or newly-created branches. It also considers the case where the owners change the name of the fork. Format of filename is: *owner_of_fork*:*fork_name*:*hash_value*
+```shell
+cd ./Diffs_new/
+python ./new_cluster.py
+```
 
-* [Samples](https://github.com/shihualu/research_project_summary/tree/master/Samples) contains malware samples provided by Google, downloaded via virustotal API
+This will generate two processed files `commits2.pkl` and `vectors2.npy` that are required in later analysis. **Notice that these two files are already included in the repo and you can use them directly.**
 
-## Sensitive API Calls attempted
-* getDeviceId
-* getSubscriberId
-* getSimSerialNumber
-* getLine1Number
-* abortBroadcast
-* sendTextMessage
-* exec
-* addFlags
-* getDisplayMetrics
-* getDefaultDisplay
-* dispatchTouchEvent
-* performAction(AccessibilityNodeInfo.ACTION_CLICK)
-* getLatitude
-* getLongitude
+Then process the malicious code snippets:
 
-## Sensitive permissions attempted
-* SEND_SMS
-* READ_CONTACTS
-* WRITE_CONTACTS
-* CALL_PHONE
-* ADD_VOICEMAIL
-* READ_CALENDAR
-* WRITE_CALENDAR
-* ACCESS_FINE_LOCATION
-* ACCESS_COARSE_LOCATION
-* RECORD_AUDIO
+```shell
+cd ./Diffs_malicious/
+python ./new_cluster.py
+```
 
-## Link to some weird commits
-<https://docs.google.com/spreadsheets/d/1hSdGv0WPw3DTZ0zlsTNycfHRjOs6xfPCRcL-yTpc-j8/edit#gid=611728173>
+This will generate two processed files `mcommits2.pkl` and `mvectors2.npy` that are required in later analysis. **These two files are also included in the repo and you can use them directly.**
+
+So to perform the actual analysis, locate to `Diffs_new/Analysis.ipynb` and use Jupyter Lab/Notebook to load the notebook. There are three code sections:
+
+1. **Common Section**: This is required for data loading and pre-processing. You should run the whole section every time you want to perform analysis.
+2. **SparsePCA + K-Means**: This section performs the PCA dimension reduction and K-Means.
+3. **SparsePCA + DBSCAN**: This section performs the PCA dimension reduction and DBSCAN.
+
+Run the **Common Section** every time you start new analysis, and choose one of the remaining section to run, and you will get the final results. You can also tune the parameters (e.g., `n_clusters`) after observing the visualization results to get better fitting results.

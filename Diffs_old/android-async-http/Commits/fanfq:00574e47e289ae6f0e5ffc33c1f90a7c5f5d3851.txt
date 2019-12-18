@@ -1,4 +1,0 @@
-diff --git a/build.xml b/backup/build.xml
-similarity index 100%
-rename from build.xml
-rename to backup/build.xml

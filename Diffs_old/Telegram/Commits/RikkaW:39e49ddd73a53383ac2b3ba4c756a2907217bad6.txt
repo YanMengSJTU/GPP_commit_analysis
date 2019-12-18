@@ -1,3 +1,0 @@
-diff --git a/TMessagesProj/src/main/assets/fonts/ritalic.ttf b/TMessagesProj/src/main/assets/fonts/ritalic.ttf
-old mode 100755
-new mode 100644
